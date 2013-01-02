@@ -1,0 +1,16 @@
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: bp_at_home_development
+  pool: 5
+  username: Edward
+  password:
+
+test:
+  adapter: postgresql
+  encoding: unicode
+  database: bp_at_home_test
+  pool: 5
+  username: Edward
+  password:
+
