@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
       patient = Patient.find_by_identifier(params[:identifier])
       if patient
         session[:patient_id] = patient.id
-        redirect_to root_path, notice: "Logged in as a patient"
+        redirect_to patient_readings_path(patient), notice: "Logged in as a patient"
       else
         flash.now.alert = "Sorry we could not find that identifier"
         render 'pages/home'

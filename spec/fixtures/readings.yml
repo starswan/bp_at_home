@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  systolic: 1
+  diastolic: 1
+  pulse: 1
+  patient_id: 1
+
+two:
+  systolic: 1
+  diastolic: 1
+  pulse: 1
+  patient_id: 1

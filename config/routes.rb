@@ -7,9 +7,14 @@ BpAtHome::Application.routes.draw do
   resources :doctors do
     resources :patients
   end
+
   resource :sessions
+  
+  resources :patients do
+    resources :readings
+  end
 
   get "pages/home"
-   root :to => 'pages#home'
+  root :to => 'pages#home'
 
 end
