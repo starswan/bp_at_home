@@ -1,1 +1,22 @@
-%h1 Welcome to BP At Home!
+.hero-unit
+  %h1 Welcome to BP at Home
+  %p A simple solution for patient to record their home blood pressures and have them reviewed by their doctor
+
+.row
+  .span12
+    %h2 Are you doctor?
+    %h4 Need to register?
+    %p= link_to 'Sign up', new_doctor_path, class: "btn"
+
+    %h4 Sign in
+    .login_form 
+      = form_tag sessions_path do
+        = label_tag :email
+        %br
+        = text_field_tag :email, params[:email]
+
+        = label_tag :password
+        %br
+        = password_field_tag :password
+        %br
+        = submit_tag "Login", class: "btn"
