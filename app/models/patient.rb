@@ -3,7 +3,16 @@ class Patient < ActiveRecord::Base
 
   belongs_to :doctor
   has_many :readings
-  
+
+  def systolic_average
+    arr = self.readings.map(&:systolic)
+    arr.inject { |sum, el| sum + el }.to_f / arr.size
+  end  
+
+  def diastolic_average
+    arr = self.readings.map(&:diastolic)
+    arr.inject { |sum, el| sum + el }.to_f / arr.size
+  end
   def readings_chart
     @readings = self.readings
     

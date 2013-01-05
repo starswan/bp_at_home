@@ -30,6 +30,7 @@
         Enter the readings into the following form:
         = simple_form_for([@patient, @reading], html: { class: 'form-vertical' }) do |f|
           = f.hidden_field :patient_id, value: @patient.id
+          = f.input :arm, as: :select, collection: %w(Right Left)
           = f.input :systolic, label: 'Systolic pressure', hint: 'The systolic is top/higher figure'
           = f.input :diastolic, label: 'Diastolic pressure', hint: 'The diastolic is the bottom/lower figure'
           = f.input :pulse, label: 'Pulse'

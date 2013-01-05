@@ -27,4 +27,17 @@
               %td= reading.systolic
               %td= reading.diastolic
               %td= reading.pulse
-              %td TO DO
+              %td= reading.arm
+
+- unless @patient.readings.empty?
+  .row
+    .span6
+      .well
+        %h4 Derived data
+        %dl.dl-horizontal
+          %dt Total readings taken
+          %dd= @patient.readings.count
+          %dt Systolic Average 
+          %dd= @patient.systolic_average.to_i
+          %dt Diastolic Average
+          %dd= @patient.diastolic_average.to_i
