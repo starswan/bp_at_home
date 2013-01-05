@@ -1,4 +1,5 @@
 class ReadingsController < ApplicationController
+  before_filter :authorize_patient!
 
   def index
     @patient = Patient.find(params[:patient_id])

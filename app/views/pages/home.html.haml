@@ -1,14 +1,15 @@
 .hero-unit
   %h1 Welcome to BP at Home
-  %p A simple solution for patient to record their home blood pressures and have them reviewed by their doctor
+  %p A simple solution for patients to record their home blood pressures and have them reviewed by their doctor
 
 .row
   .span6
     %h2 Are you doctor?
+    %hr
     %h4 Need to register?
-    %p= link_to 'Sign up', new_doctor_path, class: "btn"
+    %p= link_to 'Sign up', new_doctor_path, class: "btn btn-primary"
 
-    %h4 Sign in
+    %h4{style: "margin-top: 50px;"} Sign in
     .login_form 
       = form_tag sessions_path do
         = label_tag :email
@@ -19,14 +20,15 @@
         %br
         = password_field_tag :password
         %br
-        = submit_tag "Login", class: "btn"
+        = submit_tag "Login", class: "btn btn-primary"
   .span6
     %h2 Are you a patient?
+    %hr
     %p Please enter your unique identifier to login and start entering readings
-
-    .login_form
+    .login_form{style: "margin-top: 30px;"}
       = form_tag sessions_path(query: 'patient'), class: 'form-horizontal' do
         = label_tag :identifier
         = text_field_tag :identifier
         %br
-        = submit_tag 'Login', class: 'btn'
+        %br
+        = submit_tag 'Login', class: 'btn btn-success'

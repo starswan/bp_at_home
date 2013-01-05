@@ -1,4 +1,5 @@
 class PatientsController < ApplicationController
+  before_filter :authorize_doctor!
 
   def index
    @doctor = Doctor.find(params[:doctor_id]) 
