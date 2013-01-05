@@ -16,7 +16,7 @@ class PatientsController < ApplicationController
     identifier = generate_random_identifier
     patient = @doctor.patients.create(identifier: identifier)
     if patient.save
-      redirect_to doctor_patients_path(@doctor), notice: "Patient successfully added"
+      redirect_to doctor_patients_path(@doctor), notice: "Patient successfully added. You can now give them your unique identifier. Be sure to record it in the notes as well."
     else
       flash.now.alert = "Something went wrong. Please try again"
       render :index
