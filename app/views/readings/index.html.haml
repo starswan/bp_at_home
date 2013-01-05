@@ -2,29 +2,40 @@
 
 .row
   .span12
-    graph area
-
+    = high_chart('bp_chart', @chart)
 
 .row
+  .span12
+    %h4 Your targets
+    = link_to "export copy for your GP", patient_readings
+    %p
+      %span.label Total readings taken
+      #{@readings.count}
+    %p
+      %span.label.label-important Total remaining
+      #{28 - @readings.count}
+
+.row{style: "margin-top: 40px;"}
   .span6
     %h3 How to measure your blood pressure
     %p Get started by watching this video all about measuring your blood pressure
     %p Once you have done this get started by entering your first blood pressure on the left
     <iframe width="400" height="400" src="http://www.videojug.com/embed/e645c004-d5d4-b23d-dcce-ff0008c95709" frameborder="0" allowfullscreen></iframe>
   .span6
-    %h3 Enter your blood pressure
-    %p
-      %span.badge.badge-success Step 1
-      Record your blood pressure. Be sure to make not of systolic, diastolic and your pulse.
-    %p
-      %span.badge.badge-success Step 2
-      Enter the readings into the following form:
-      = simple_form_for([@patient, @reading], html: { class: 'form-vertical' }) do |f|
-        = f.hidden_field :patient_id, value: @patient.id
-        = f.input :systolic, label: 'Systolic pressure', hint: 'The systolic is top/higher figure'
-        = f.input :diastolic, label: 'Diastolic pressure', hint: 'The diastolic is the bottom/lower figure'
-        = f.input :pulse, label: 'Pulse'
-        = f.submit 'Continue', class: 'btn btn-primary'
-    %p
-      %span.badge.badge-success Step 3
-      Check the graph to see how you are doing
+    .well
+      %h3 Enter your blood pressure
+      %p
+        %span.badge.badge-success Step 1
+        Record your blood pressure. Be sure to make not of systolic, diastolic and your pulse.
+      %p
+        %span.badge.badge-success Step 2
+        Enter the readings into the following form:
+        = simple_form_for([@patient, @reading], html: { class: 'form-vertical' }) do |f|
+          = f.hidden_field :patient_id, value: @patient.id
+          = f.input :systolic, label: 'Systolic pressure', hint: 'The systolic is top/higher figure'
+          = f.input :diastolic, label: 'Diastolic pressure', hint: 'The diastolic is the bottom/lower figure'
+          = f.input :pulse, label: 'Pulse'
+          = f.submit 'Continue', class: 'btn btn-primary'
+      %p
+        %span.badge.badge-success Step 3
+        Check the graph to see how you are doing

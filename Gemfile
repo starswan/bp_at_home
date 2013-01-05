@@ -5,6 +5,7 @@ gem 'pg'
 gem 'haml-rails'
 gem 'bcrypt-ruby', '~> 3.0.0'
 gem 'simple_form'
+gem 'lazy_high_charts'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
