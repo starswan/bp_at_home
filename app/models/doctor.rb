@@ -3,4 +3,5 @@ class Doctor < ActiveRecord::Base
   has_secure_password
   
   validates_uniqueness_of :email
+  has_many :patients
 end

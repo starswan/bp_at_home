@@ -4,7 +4,9 @@ BpAtHome::Application.routes.draw do
   get 'login', to: 'sessions#new', as: 'login'
   get 'logout', to: 'sessions#destroy', as: 'logout'
 
-  resources :doctors
+  resources :doctors do
+    resources :patients
+  end
   resource :sessions
 
   get "pages/home"

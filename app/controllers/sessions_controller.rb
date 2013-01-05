@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
     doctor = Doctor.find_by_email(params[:email])
     if doctor && doctor.authenticate(params[:password])
       session[:doctor_id] = doctor.id
-      redirect_to root_url, notice: "Logged in!"
+      redirect_to doctor_patients_path(doctor), notice: "Logged in!"
     else
       flash.now.alert = "Email or password is invalid!"
       render 'pages/home'
