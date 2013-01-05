@@ -14,9 +14,11 @@
         %tr
           %th Created on
           %th Identifier
+          %th
       %tbody
         - @patients.each do |patient|
           %tr
             %td= patient.created_at.to_s(:long)
             %td= patient.identifier
+            %td= link_to "View patient report", doctor_patient_path(@doctor, patient)
 

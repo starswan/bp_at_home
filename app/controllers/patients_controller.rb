@@ -5,6 +5,11 @@ class PatientsController < ApplicationController
    @patients = @doctor.patients
   end
 
+  def show
+    @patient = Patient.find(params[:id]) 
+    @chart = @patient.readings_chart
+  end
+
   def create
     @doctor = Doctor.find(params[:doctor_id])
     identifier = generate_random_identifier

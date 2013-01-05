@@ -1,5 +1,3 @@
-%h1 Welcome to BP at Home 
-
 .row
   .span12
     = high_chart('bp_chart', @chart)
@@ -7,10 +5,10 @@
 .row
   .span12
     %h4 Your targets
-    = link_to "export copy for your GP", patient_readings
+    = link_to "export copy for your GP", "#"
     %p
       %span.label Total readings taken
-      #{@readings.count}
+      #{@readings.count} 
     %p
       %span.label.label-important Total remaining
       #{28 - @readings.count}
