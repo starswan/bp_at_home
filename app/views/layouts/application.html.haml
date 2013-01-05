@@ -29,7 +29,7 @@
           .container.nav-collapse
             %ul.nav
               %li= link_to "Home", root_path
-            - if current_user
+            - if current_doctor || current_patient
               %ul.nav.pull-right
                 %li= link_to 'Log out', logout_path
             
@@ -37,7 +37,7 @@
     .container
 
       .row
-        .span9
+        .span12
           = bootstrap_flash
           = yield
     

@@ -3,13 +3,22 @@ class ApplicationController < ActionController::Base
   
   private
 
-  def current_user
-    @current_user ||= Doctor.find(session[:doctor_id]) if session[:doctor_id]
+  def current_doctor
+    @current_doctor ||= Doctor.find(session[:doctor_id]) if session[:doctor_id]
   end
-  helper_method :current_user
+  helper_method :current_doctor
 
-  def authorize
-    redirect_to root_url, alert: 'Not authorized' if current_user.nil?
+  def current_patient
+    @current_patient || Patient.find(session[:patient_id]) if session[:patient_id]
+  end
+  helper_method :current_patient
+
+  def authorize_doctor!
+    redirect_to root_url, alert: 'Not authorized' if current_doctor.nil?
+  end
+  
+  def authorize_patient!
+    redirect_to root_url, alert: 'Not authorized' if current_patient.nil?  
   end
 
 end
