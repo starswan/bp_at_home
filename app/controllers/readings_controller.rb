@@ -10,11 +10,13 @@ class ReadingsController < ApplicationController
   
   def create
     @patient = Patient.find(params[:patient_id])
+    @readings = @patient.readings
+    @chart = @patient.readings_chart
     @reading = Reading.create(params[:reading])
     if @reading.save
       redirect_to patient_readings_path(@patient), notice: "Reading successfully entered!"
     else
-      flash.now.alert = "There was an error. Please try again"
+      flash.now.alert = "There was an error with your entry. Please check and try again"
       render :index
     end
   end
