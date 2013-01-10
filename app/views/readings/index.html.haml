@@ -21,7 +21,7 @@
       %p= @pulse_average
 
 
-- if current_patient && params[:action] == 'index'
+- if current_patient && params[:action] == 'index' || params[:action] == 'create'
   .row{style: "margin-top: 40px;"}
     .span6
       .well
