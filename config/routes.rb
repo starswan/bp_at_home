@@ -11,7 +11,9 @@ BpAtHome::Application.routes.draw do
   resource :sessions
   
   resources :patients do
-    resources :readings
+    resources :readings do
+      collection { get 'export' }
+    end
   end
 
   get "pages/home"

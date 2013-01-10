@@ -8,7 +8,14 @@ class PatientsController < ApplicationController
 
   def show
     @patient = Patient.find(params[:id]) 
+    @readings = @patient.readings.order(:created_at)
+    @sys_average = @patient.sys_average
+    @dys_average = @patient.dys_average
+    @pulse_average = @patient.pulse_average
     @chart = @patient.readings_chart
+    
+    @reading = @patient.readings.new
+    render 'readings/index'
   end
 
   def create
