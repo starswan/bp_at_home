@@ -3,7 +3,7 @@ class Reading < ActiveRecord::Base
 
   belongs_to :patient
 
-  validates :systolic, :diastolic, :pulse, :arm, presence: true
+  validates :systolic, :diastolic, :pulse, :created_at, :arm, presence: true
   validates_numericality_of :systolic, greater_than_or_equal_to: 80, only_integer: true
   validates_numericality_of :diastolic, greater_than_or_equal_to: 30, only_integer: true
 
