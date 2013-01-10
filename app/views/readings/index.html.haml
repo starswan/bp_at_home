@@ -1,24 +1,47 @@
+.row
+  .span12
+    = high_chart('bp_chart', @chart)
+
+.row{style: "margin-top: 30px; margin-bottom: 30px;"}
+  .span3
+    .info_box.readings
+      %h6 Readings taken
+      %p= "#{@readings.count} / 18"
+  .span3
+    .info_box.average_systolic
+      %h6 Average systolic
+      %p= @sys_average
+  .span3
+    .info_box.average_diastolic
+      %h6 Average diastolic
+      %p= @dys_average
+  .span3
+    .info_box.pulse
+      %h6 Average pulse
+      %p= @pulse_average
+
 = link_to "export copy for your GP", "#"
 
 .row{style: "margin-top: 40px;"}
   .span6
     .well
-      %h3 Enter your blood pressure
+      %h2 Enter your blood pressure
       %p
         %span.badge.badge-success Step 1
       %p
         Record your blood pressure. Be sure to make a note of systolic, diastolic and your pulse. See helpful tips on the right.
-      %p
+      %p{style: "margin-top: 30px;"}
         %span.badge.badge-success Step 2
       %p
         Enter the readings into the following form:
         = simple_form_for([@patient, @reading], html: { class: 'form-vertical' }) do |f|
           = f.hidden_field :patient_id, value: @patient.id
+          = f.input :created_at, as: 'string', label: 'Taken on'
           = f.input :arm, as: :select, collection: %w(Right Left), label: "Which arm did you use?"
           = f.input :systolic, label: 'Systolic pressure', hint: 'The systolic is top/higher figure'
           = f.input :diastolic, label: 'Diastolic pressure', hint: 'The diastolic is the bottom/lower figure'
           = f.input :pulse, label: 'Pulse'
-          = f.submit 'Continue', class: 'btn btn-primary'
+          = f.submit 'Add blood pressure', class: 'btn btn-primary btn-large'
       %p
         %span.badge.badge-success Step 3
       %p
@@ -35,6 +58,3 @@
             %p Once you have done this get started by entering your first blood pressure on the left
             <iframe width="400" height="400" src="http://www.videojug.com/embed/e645c004-d5d4-b23d-dcce-ff0008c95709" frameborder="0" allowfullscreen></iframe>
 
-.row
-  .span12
-    = high_chart('bp_chart', @chart)

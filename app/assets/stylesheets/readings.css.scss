@@ -1,3 +1,24 @@
 // Place all the styles related to the readings controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+.info_box {
+
+  background-color: orange;
+  padding: 20px;
+  text-align: center;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  border: 1px solid #EFEFEF;
+  box-shadow: 5px 5px 5px #EEE;
+
+  h6 {
+    font-size: 21px;
+  }
+
+  p {
+    font-size: 18px; 
+  }
+}
