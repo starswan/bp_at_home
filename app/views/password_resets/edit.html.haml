@@ -1,0 +1,9 @@
+.page-header
+  %h1 Reset Password
+
+%p Please complete the form below to change your password.
+
+= simple_form_for(@doctor, url: password_reset_path(params[:id]), html: { class: 'form-vertical'}) do |f|
+  = f.input :password
+  = f.input :password_confirmation
+  = f.submit "Change password", class: "btn btn-primary"
