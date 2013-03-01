@@ -1,7 +1,10 @@
 .row
   .span6.title_box
     %h1 BP at Home
-    %p A simple and free solution for patients to record their home blood pressures and have them reviewed by their doctor.
+    %p A free and simple solution for patients to record their home blood pressures and have them reviewed by their GP.
+
+    %p{style: "margin-top: 50px;"}
+      %i Note: This web application does not support IE7. Please use Chrome, Firefox or Safari.
   .span6
     =image_tag 'preview.png', class: 'img-polaroid'
 
@@ -14,7 +17,7 @@
     %p= link_to 'Sign up', new_doctor_path, class: "btn btn-primary"
 
     %h4{style: "margin-top: 30px;"} Sign in
-    .login_form 
+    .login_form
       = form_tag sessions_path do
         = label_tag :email
         = text_field_tag :email, params[:email]
