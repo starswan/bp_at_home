@@ -18,6 +18,9 @@
         = label_tag :to
         = text_field_tag :to, params[:to]
         = submit_tag "Filter", name: nil, class: "btn btn-info"
+        = link_to doctor_patient_path(current_doctor, @patient), class: "btn btn-danger" do
+          %i.icon-refresh
+          Reset
 - elsif current_patient && @readings.count > 0 && params[:action] != 'export'
   .row{style: "margin-top: 20px;"}
     .span12
@@ -30,6 +33,9 @@
         = label_tag :to
         = text_field_tag :to, params[:to]
         = submit_tag "Filter", name: nil, class: "btn btn-info"
+        = link_to patient_readings_path(@patient), class: "btn btn-danger" do
+          %i.icon-refresh
+          Reset
 
 .row{style: "margin-top: 30px; margin-bottom: 30px;"}
   .span3

@@ -14,11 +14,11 @@ class ApplicationController < ActionController::Base
   helper_method :current_patient
 
   def authorize_doctor!
-    redirect_to root_url, alert: 'Not authorized' if current_doctor.nil?
+    redirect_to root_url, alert: 'You are not authorized to view that information. Please login to proceed' if current_doctor.nil?
   end
 
   def authorize_patient!
-    redirect_to root_url, alert: 'Not authorized' if current_patient.nil?
+    redirect_to root_url, alert: 'You are not authorized to view that information. Please login to proceed' if current_patient.nil?
   end
 
 end
