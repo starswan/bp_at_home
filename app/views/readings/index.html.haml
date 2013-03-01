@@ -80,6 +80,10 @@
             .accordion-inner
               %p
                 %a{href: "http://healthguides.mapofmedicine.com/choices/map/hypertension1.html", target: "_blank"}Map of Medicine
+              %p
+                %a{href: "http://www.nhs.uk/conditions/Blood-pressure-(high)/Pages/Introduction.aspx", target: "_blank"}NHS Choices
+              %p
+                %a{href: "http://www.htmc.co.uk/pages/pv.asp?p=htmc48", target: "_blank"}Haighton Thornley on Hypertension
 
       - if current_patient && params[:action] == 'index'
         = link_to export_patient_readings_path(current_patient), class: "btn btn-large btn-success" do
