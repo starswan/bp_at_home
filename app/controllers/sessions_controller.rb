@@ -15,7 +15,11 @@ class SessionsController < ApplicationController
     else
       doctor = Doctor.find_by_email(params[:email])
       if doctor && doctor.authenticate(params[:password])
-        session[:doctor_id] = doctor.id
+        if params[:remember_me]
+          cookies.permanent[:auth_token] = doctor.auth_token
+        else
+          cookies[:auth_token] = doctor.auth_token
+        end
         redirect_to doctor_patients_path(doctor), notice: "Congratulations. You are logged in."
       else
         flash.now.alert = "Email or password is invalid!"
@@ -25,7 +29,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    session[:doctor_id] = nil
+    cookies.delete(:auth_token)
     session[:patient_id] = nil
     redirect_to root_url, notice: 'Logged out'
   end

@@ -1,5 +1,7 @@
 BpAtHome::Application.routes.draw do
 
+  get "password_resets/new"
+
   get 'signup', to: 'user#new', as: 'signup'
   get 'login', to: 'sessions#new', as: 'login'
   get 'logout', to: 'sessions#destroy', as: 'logout'

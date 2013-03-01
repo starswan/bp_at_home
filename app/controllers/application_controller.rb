@@ -1,10 +1,10 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  
+
   private
 
   def current_doctor
-    @current_doctor ||= Doctor.find(session[:doctor_id]) if session[:doctor_id]
+    @current_doctor ||= Doctor.find_by_auth_token!(cookies[:auth_token]) if cookies[:auth_token]
   end
   helper_method :current_doctor
 
@@ -16,9 +16,9 @@ class ApplicationController < ActionController::Base
   def authorize_doctor!
     redirect_to root_url, alert: 'Not authorized' if current_doctor.nil?
   end
-  
+
   def authorize_patient!
-    redirect_to root_url, alert: 'Not authorized' if current_patient.nil?  
+    redirect_to root_url, alert: 'Not authorized' if current_patient.nil?
   end
 
 end

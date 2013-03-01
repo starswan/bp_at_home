@@ -22,6 +22,9 @@
         = text_field_tag :email, params[:email]
         = label_tag :password
         = password_field_tag :password
+        .field
+          = label_tag :remember_me
+          = check_box_tag :remember_me, 1, params[:remember_me]
         %br
         = submit_tag "Login", class: "btn btn-primary"
   .span6
