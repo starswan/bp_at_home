@@ -3,7 +3,7 @@
     - if @readings.count > 0
       = content_tag(:div, "", id: "readings_chart", data: { readings: @readings })
     - else
-      %h2{style: "color: red;"} No readings yet
+      %h2{style: "color: red;"} No readings yet for this date range
 
 / only show the seach form if a current doctor
 - if current_doctor && @readings.count > 0
@@ -13,6 +13,18 @@
       %p
         %i Note: Dates are in 'yyyy-mm-dd' format
       = form_tag doctor_patient_path(current_doctor, @patient), method: :get, class: "form-search" do
+        = label_tag :from
+        = text_field_tag :from, params[:from]
+        = label_tag :to
+        = text_field_tag :to, params[:to]
+        = submit_tag "Filter", name: nil, class: "btn btn-info"
+- elsif current_patient && @readings.count > 0 && params[:action] != 'export'
+  .row{style: "margin-top: 20px;"}
+    .span12
+      %h4 Filter by Dates
+      %p
+        %i Note: Dates are in 'yyyy-mm-dd' format
+      = form_tag patient_readings_path(@patient), method: :get, class: "form-search" do
         = label_tag :from
         = text_field_tag :from, params[:from]
         = label_tag :to
