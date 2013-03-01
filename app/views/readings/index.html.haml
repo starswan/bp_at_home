@@ -56,6 +56,13 @@
               %p Get started by watching this video all about measuring your blood pressure
               %p Once you have done this get started by entering your first blood pressure on the left
               <iframe width="400" height="400" src="http://www.videojug.com/embed/e645c004-d5d4-b23d-dcce-ff0008c95709" frameborder="0" allowfullscreen></iframe>
+          .accordion-heading
+            %a.accordion-toggle{"data-parent"=>"accordion2", "data-toggle"=>"collapse", href: "#collapseTwo"}
+              Useful links
+          #collapseTwo.accordion-body.collapse
+            .accordion-inner
+              %p
+                %a{href: "http://healthguides.mapofmedicine.com/choices/map/hypertension1.html", target: "_blank"}Map of Medicine
 
       - if current_patient && params[:action] == 'index'
         = link_to "Export readings for your GP", export_patient_readings_path(current_patient), class: "btn btn-large btn-success"
