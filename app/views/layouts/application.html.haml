@@ -15,8 +15,6 @@
     %link(href="images/apple-touch-icon-72x72.png" rel="apple-touch-icon-precomposed" sizes="72x72")
     %link(href="images/apple-touch-icon.png" rel="apple-touch-icon-precomposed")
     %link(href="favicon.ico" rel="shortcut icon")
-
-
   %body
     .navbar.navbar-fixed-top
       .navbar-inner
@@ -32,10 +30,7 @@
             - if current_doctor || current_patient
               %ul.nav.pull-right
                 %li= link_to 'Log out', logout_path
-            
-
     .container.inner_page
-
       .row
         .span12
           - flash.each do |name, msg|
@@ -43,5 +38,4 @@
               %a{class: "close", data: { dismiss: "alert" }}
               = msg
           = yield
-    
       %footer

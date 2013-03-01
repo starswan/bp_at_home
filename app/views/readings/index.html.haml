@@ -1,6 +1,6 @@
 .row
   .span12
-    = high_chart('bp_chart', @chart)
+    = content_tag(:div, "", id: "readings_chart", data: { readings: @readings })
 
 .row{style: "margin-top: 30px; margin-bottom: 30px;"}
   .span3
@@ -19,7 +19,6 @@
     .info_box.pulse
       %h6 Average pulse
       %p= @pulse_average
-
 
 - if current_patient && params[:action] == 'index' || params[:action] == 'create'
   .row{style: "margin-top: 40px;"}
@@ -40,7 +39,7 @@
             = f.input :arm, as: :select, collection: %w(Right Left), label: "Which arm did you use?"
             = f.input :systolic, label: 'Systolic pressure', hint: 'The systolic is top/higher figure'
             = f.input :diastolic, label: 'Diastolic pressure', hint: 'The diastolic is the bottom/lower figure'
-            = f.input :pulse, label: 'Pulse'
+            = f.input :pulse, label: 'Pulse', hint: 'Beats per minute'
             = f.submit 'Add blood pressure', class: 'btn btn-primary btn-large'
         %p
           %span.badge.badge-success Step 3
@@ -60,6 +59,7 @@
 
       - if current_patient && params[:action] == 'index'
         = link_to "Export readings for your GP", export_patient_readings_path(current_patient), class: "btn btn-large btn-success"
+
 - elsif current_doctor || current_patient && params[:action] == 'export'
   .row
     .span12
@@ -82,6 +82,11 @@
                 %td= reading.diastolic
                 %td= reading.pulse
                 %td= reading.arm
+  .row
+    .span12
+      .page-header
+        %h4 Note to doctor
+      %p Please that this table show ALL of the blood pressure taken. In order to see blood pressure over a specific period for this patient please login with you account to BP At Home and set custom to and from dates.
 
 .modal.hide.fade
   .modal-header

@@ -5,7 +5,6 @@ gem 'pg'
 gem 'haml-rails'
 gem 'bcrypt-ruby', '~> 3.0.0'
 gem 'simple_form'
-gem 'lazy_high_charts'
 gem 'thin'
 gem 'newrelic_rpm'
 

@@ -14,5 +14,22 @@
 //= require jquery_ujs
 //= require jquery.ui.datepicker
 //= require twitter/bootstrap
-//= require highcharts
-//= require_tree .
+//= require raphael
+//= require morris
+
+jQuery(function() {
+
+  // setup the date picker for selecting blood pressure data
+  $('#reading_created_at').datepicker({
+    dateFormat: 'yy-mm-dd'
+  });
+
+  // setup the morris js graph
+  return Morris.Line({
+    element: 'readings_chart',
+    data: $('#readings_chart').data('readings'),
+    xkey: 'created_at',
+    ykeys: ['systolic', 'diastolic', 'pulse'],
+    labels: ['Systolic', 'Diastolic', 'Pulse']
+  });
+});

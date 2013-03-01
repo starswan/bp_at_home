@@ -1,7 +1,7 @@
 .row
   .span6.title_box
     %h1 BP at Home
-    %p A simple and free solution for patients to record their home blood pressures and have them reviewed by their doctor
+    %p A simple and free solution for patients to record their home blood pressures and have them reviewed by their doctor.
   .span6
     =image_tag 'preview.png', class: 'img-polaroid'
 
@@ -10,25 +10,22 @@
   .span6
     %h2 Are you doctor?
     %hr
-    %h4 Need to register?
+    %h4 Sign up
     %p= link_to 'Sign up', new_doctor_path, class: "btn btn-primary"
 
-    %h4{style: "margin-top: 50px;"} Sign in
+    %h4{style: "margin-top: 30px;"} Sign in
     .login_form 
       = form_tag sessions_path do
         = label_tag :email
-        %br
         = text_field_tag :email, params[:email]
-
         = label_tag :password
-        %br
         = password_field_tag :password
         %br
         = submit_tag "Login", class: "btn btn-primary"
   .span6
     %h2 Are you a patient?
     %hr
-    %p Please enter your unique identifier to login and start entering readings
+    %p Please enter your unique identifier to login and start entering your blood pressure readings
     .login_form{style: "margin-top: 30px;"}
       = form_tag sessions_path(query: 'patient') do
         = label_tag :identifier

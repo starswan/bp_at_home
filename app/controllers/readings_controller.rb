@@ -3,16 +3,10 @@ class ReadingsController < ApplicationController
 
   def index
     @patient = Patient.find(params[:patient_id])
-    @readings = @patient.readings
-
-    @sys_average = @patient.sys_average
-    @dys_average = @patient.dys_average
-    @pulse_average = @patient.pulse_average
-
+    readings_charts_and_averages
     @reading = @patient.readings.new
-    @chart = @patient.readings_chart
   end
-  
+
   def create
     @patient = Patient.find(params[:patient_id])
     @readings = @patient.readings
@@ -25,18 +19,21 @@ class ReadingsController < ApplicationController
       render :index
     end
   end
-  
+
   def export
     @patient = Patient.find(params[:patient_id])
-    @readings = @patient.readings
-
-    @sys_average = @patient.sys_average
-    @dys_average = @patient.dys_average
-    @pulse_average = @patient.pulse_average
-
+    readings_charts_and_averages
     @reading = @patient.readings.new
-    @chart = @patient.readings_chart
-
     render :index
   end
+
+  private
+
+    def readings_charts_and_averages
+      @readings = @patient.readings
+      @sys_average = @patient.sys_average
+      @dys_average = @patient.dys_average
+      @pulse_average = @patient.pulse_average
+    end
+
 end
