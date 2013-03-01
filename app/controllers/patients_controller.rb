@@ -26,11 +26,17 @@ class PatientsController < ApplicationController
     identifier = generate_random_identifier
     patient = @doctor.patients.create(identifier: identifier)
     if patient.save
-      redirect_to doctor_patients_path(@doctor), notice: "Patient successfully added. You can now give them their unique identifier. Be sure to record it in the patient record as well."
+      redirect_to doctor_patients_path(@doctor), notice: "Patient successfully added. You can now give them their unique identifier which they can use to login. Be sure to record it in the patient record as well."
     else
       flash.now.alert = "Something went wrong. Please try again"
       render :index
     end
+  end
+
+  def destroy
+    patient = Patient.find(params[:id])
+    patient.destroy
+    redirect_to doctor_patients_path(current_doctor), notice: "Patient successfully removed."
   end
 
   private

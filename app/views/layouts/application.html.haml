@@ -25,6 +25,11 @@
                 = link_to root_path do
                   %i.icon-home
                   Home
+              - if current_doctor
+                %li
+                  = link_to doctor_patients_path(current_doctor) do
+                    %i.icon-user
+                    Patients
             - if current_doctor || current_patient
               %ul.nav.pull-right
                 %li

@@ -2,7 +2,9 @@
   %h1 Your Registered Patients
 
 .add_new_patient_form{style: "margin-bottom: 20px;"}
-  = link_to "Add a new patient", doctor_patients_path(@doctor), method: :post, class: "btn btn-primary"
+  = link_to doctor_patients_path(@doctor), method: :post, class: "btn btn-primary" do
+    %i.icon-plus
+    Add a new patient
 
 .patients
   - if @patients.empty?
@@ -13,9 +15,9 @@
       %caption
       %thead
         %tr
-          %th Created on
-          %th Identifier
-          %th Readings taken
+          %th Added on
+          %th Identifier (used by patient to login)
+          %th Total Readings taken
           %th
       %tbody
         - @patients.each do |patient|
@@ -23,5 +25,15 @@
             %td= patient.created_at.to_s(:long)
             %td= patient.identifier
             %td= patient.readings.count
-            %td= link_to "View patient report", doctor_patient_path(@doctor, patient), class: "btn"
+            %td
+              = link_to doctor_patient_path(@doctor, patient), class: "btn" do
+                %i.icon-eye-open
+                View patient report
+              = link_to doctor_patient_path(@doctor, patient), confirm: "Are you sure? This will remove the patient and all their readings forever.", class: "btn btn-danger", method: :delete do
+                %i.icon-trash
+                Remove
+
+.page-header
+  %h3 Tips
+  %p Please record the identifier in the patient record to allow retrieval of data later.
 
