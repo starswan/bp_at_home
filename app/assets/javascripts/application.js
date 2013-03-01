@@ -20,7 +20,7 @@
 jQuery(function() {
 
   // setup the date picker for selecting blood pressure data
-  $('#reading_created_at').datepicker({
+  $('#reading_created_at, #from, #to').datepicker({
     dateFormat: 'yy-mm-dd'
   });
 

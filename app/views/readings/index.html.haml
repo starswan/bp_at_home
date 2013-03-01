@@ -2,6 +2,18 @@
   .span12
     = content_tag(:div, "", id: "readings_chart", data: { readings: @readings })
 
+/ only show the seach form if a current doctor
+- if current_doctor
+  .row{style: "margin-top: 20px;"}
+    .span12
+      %h4 Filter by Dates
+      = form_tag doctor_patient_path(current_doctor, @patient), method: :get, class: "form-search" do
+        = label_tag :from
+        = text_field_tag :from, params[:from]
+        = label_tag :to
+        = text_field_tag :to, params[:to]
+        = submit_tag "Filter", name: nil, class: "btn"
+
 .row{style: "margin-top: 30px; margin-bottom: 30px;"}
   .span3
     .info_box.readings
@@ -73,7 +85,7 @@
       - if @readings.empty?
         %h4 No readings yet for this patient
       - else
-        %table.table.table-striped
+        %table.table.table-striped.table-hover
           %thead
             %tr
               %th Created on

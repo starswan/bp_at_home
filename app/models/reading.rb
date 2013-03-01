@@ -7,4 +7,5 @@ class Reading < ActiveRecord::Base
   validates_numericality_of :systolic, greater_than_or_equal_to: 80, only_integer: true
   validates_numericality_of :diastolic, greater_than_or_equal_to: 30, only_integer: true
 
+
 end

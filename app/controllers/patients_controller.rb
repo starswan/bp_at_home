@@ -8,10 +8,23 @@ class PatientsController < ApplicationController
 
   def show
     @patient = Patient.find(params[:id])
-    @readings = @patient.readings.order(:created_at)
-    @sys_average = @patient.sys_average
-    @dys_average = @patient.dys_average
-    @pulse_average = @patient.pulse_average
+
+    # if we have searched by to and from date
+    if params[:from] && params[:to]
+      from_date = params[:from]
+      to_date = params[:to]
+
+      @readings = @patient.readings.where(:created_at => from_date..to_date)
+      @sys_average = @patient.sys_average
+      @dys_average = @patient.dys_average
+      @pulse_average = @patient.pulse_average
+    # default
+    else
+      @readings = @patient.readings.order(:created_at)
+      @sys_average = @patient.sys_average
+      @dys_average = @patient.dys_average
+      @pulse_average = @patient.pulse_average
+    end
 
     @reading = @patient.readings.new
     render 'readings/index'

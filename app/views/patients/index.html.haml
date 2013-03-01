@@ -1,24 +1,26 @@
 .page-header
   %h1 Your Registered Patients
 
-.add_new_patient_form
+.add_new_patient_form{style: "margin-bottom: 20px;"}
   = link_to "Add a new patient", doctor_patients_path(@doctor), method: :post, class: "btn btn-small btn-primary"
 .patients
   - if @patients.empty?
     %p
       %span.label.label-important You have no patients yet.
   - else
-    %table.table
+    %table.table.table-striped.table-bordered
       %caption
       %thead
         %tr
           %th Created on
           %th Identifier
+          %th Readings taken
           %th
       %tbody
         - @patients.each do |patient|
           %tr
             %td= patient.created_at.to_s(:long)
             %td= patient.identifier
-            %td= link_to "View patient report", doctor_patient_path(@doctor, patient)
+            %td= patient.readings.count
+            %td= link_to "View patient report", doctor_patient_path(@doctor, patient), class: "btn"
 
