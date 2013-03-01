@@ -9,21 +9,12 @@ class PatientsController < ApplicationController
   def show
     @patient = Patient.find(params[:id])
 
-    # if we have searched by to and from date
     if params[:from] && params[:to]
-      from_date = params[:from]
-      to_date = params[:to]
-
-      @readings = @patient.readings.where(:created_at => from_date..to_date)
-      @sys_average = @patient.sys_average
-      @dys_average = @patient.dys_average
-      @pulse_average = @patient.pulse_average
-    # default
+      @readings = @patient.readings.where(:created_at => params[:from]..params[:to]).order(:created_at)
+      calculate_averages_from_averages
     else
       @readings = @patient.readings.order(:created_at)
-      @sys_average = @patient.sys_average
-      @dys_average = @patient.dys_average
-      @pulse_average = @patient.pulse_average
+      calculate_averages_from_averages
     end
 
     @reading = @patient.readings.new
@@ -48,5 +39,11 @@ class PatientsController < ApplicationController
       o = [('a'..'z'),('A'..'Z')].map { |i| i.to_a }.flatten
       string = (0...6).map{ o[rand(o.length)] }.join
       return string
+    end
+
+    def calculate_averages_from_averages
+      @sys_average = @readings.average(:systolic)
+      @dys_average = @readings.average(:diastolic)
+      @pulse_average = @readings.average(:pulse)
     end
 end

@@ -9,8 +9,7 @@ class ReadingsController < ApplicationController
 
   def create
     @patient = Patient.find(params[:patient_id])
-    @readings = @patient.readings
-    @chart = @patient.readings_chart
+    readings_charts_and_averages
     @reading = Reading.create(params[:reading])
     if @reading.save
       redirect_to patient_readings_path(@patient), notice: "Reading successfully entered!"
@@ -30,10 +29,9 @@ class ReadingsController < ApplicationController
   private
 
     def readings_charts_and_averages
-      @readings = @patient.readings
-      @sys_average = @patient.sys_average
-      @dys_average = @patient.dys_average
-      @pulse_average = @patient.pulse_average
+      @readings = @patient.readings.order(:created_at)
+      @sys_average = @readings.average(:systolic)
+      @dys_average = @readings.average(:diastolic)
+      @pulse_average = @readings.average(:pulse)
     end
-
 end

@@ -2,7 +2,8 @@
   %h1 Your Registered Patients
 
 .add_new_patient_form{style: "margin-bottom: 20px;"}
-  = link_to "Add a new patient", doctor_patients_path(@doctor), method: :post, class: "btn btn-small btn-primary"
+  = link_to "Add a new patient", doctor_patients_path(@doctor), method: :post, class: "btn btn-primary"
+
 .patients
   - if @patients.empty?
     %p

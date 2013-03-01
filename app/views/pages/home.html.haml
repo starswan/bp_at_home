@@ -2,16 +2,15 @@
   .span6.title_box
     %h1 BP at Home
     %p A free and simple solution for patients to record their home blood pressures and have them reviewed by their GP.
-
     %p{style: "margin-top: 50px;"}
-      %i Note: This web application does not support IE7. Please use Chrome, Firefox or Safari.
+      %i Note: This web application does not support IE7. Please use Chrome, Firefox or Safari (latest versions if possible)
   .span6
     =image_tag 'preview.png', class: 'img-polaroid'
 
 
 .row{style: "margin-top: 40px;"}
   .span6
-    %h2 Are you doctor?
+    %h2{style: "color: blue;"} Are you doctor?
     %hr
     %h4 Sign up
     %p= link_to 'Sign up', new_doctor_path, class: "btn btn-primary"
@@ -26,9 +25,12 @@
         %br
         = submit_tag "Login", class: "btn btn-primary"
   .span6
-    %h2 Are you a patient?
+    %h2{style: "color: green;"} Are you a patient?
     %hr
     %p Please enter your unique identifier to login and start entering your blood pressure readings
+    %p
+      %strong
+        Not sure of your identifier? Ask your doctor!
     .login_form{style: "margin-top: 30px;"}
       = form_tag sessions_path(query: 'patient') do
         = label_tag :identifier
