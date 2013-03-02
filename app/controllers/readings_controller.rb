@@ -30,6 +30,7 @@ class ReadingsController < ApplicationController
   def export
     @patient = Patient.find(params[:patient_id])
     @readings = @patient.readings.order(:created_at)
+    calculate_averages_from_averages
     @reading = @patient.readings.new
     render :index
   end
