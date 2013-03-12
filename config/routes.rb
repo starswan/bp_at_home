@@ -1,6 +1,8 @@
 BpAtHome::Application.routes.draw do
 
+  root :to => 'pages#home'
 
+  resource :sessions
   get 'signup', to: 'user#new', as: 'signup'
   get 'login', to: 'sessions#new', as: 'login'
   get 'logout', to: 'sessions#destroy', as: 'logout'
@@ -10,15 +12,10 @@ BpAtHome::Application.routes.draw do
     resources :patients
   end
 
-  resource :sessions
-
   resources :patients do
     resources :readings do
       collection { get 'export' }
     end
   end
-
-  get "pages/home"
-  root :to => 'pages#home'
 
 end

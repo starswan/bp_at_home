@@ -16,9 +16,10 @@ group :assets do
   gem 'jquery-ui-rails'
 end
 
-group :test, :development do
-	gem 'rspec-rails', '~> 2.0'
-  gem 'capybara', '~> 2.0.2'
+group :test do
+  gem 'tork'
+  gem 'rb-fsevent'
+  gem 'shoulda'
 end
 
 gem 'jquery-rails'
