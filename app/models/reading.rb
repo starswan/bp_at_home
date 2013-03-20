@@ -1,5 +1,5 @@
 class Reading < ActiveRecord::Base
-  attr_accessible :diastolic, :patient_id, :pulse, :systolic, :arm, :created_at
+  attr_accessible :diastolic, :patient_id, :pulse, :systolic, :arm, :created_at, :time
 
   belongs_to :patient
 

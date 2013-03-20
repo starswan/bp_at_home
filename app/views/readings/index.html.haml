@@ -71,6 +71,7 @@
           = simple_form_for([@patient, @reading], html: { class: 'form-vertical' }) do |f|
             = f.hidden_field :patient_id, value: @patient.id
             = f.input :created_at, as: 'string', label: 'Taken on'
+            = f.input :time, label: 'Time taken'
             = f.input :arm, as: :select, collection: %w(Right Left), label: "Which arm did you use?"
             = f.input :systolic, label: 'Systolic pressure', hint: 'The systolic is the top/higher figure'
             = f.input :diastolic, label: 'Diastolic pressure', hint: 'The diastolic is the bottom/lower figure'
@@ -118,6 +119,7 @@
           %thead
             %tr
               %th Created on
+              %th Time taken
               %th Systolic BP
               %th Diastolic BP
               %th Pulse
@@ -125,7 +127,8 @@
           %tbody
             - @readings.each do |reading|
               %tr
-                %td= reading.created_at.to_s(:short) if reading.created_at
+                %td= reading.created_at.strftime('%e %b %Y') if reading.created_at
+                %td= reading.time.strftime('%l %P') if reading.time
                 %td= reading.systolic
                 %td= reading.diastolic
                 %td= reading.pulse
@@ -142,7 +145,7 @@
   .modal-body
     %p Just go up to the file menu of your browser and press print!
   .modal-footer
-    %a{href: '#', class: 'btn btn-primary', data: { dismiss: 'modal' }} Go it!
+    %a{href: '#', class: 'btn btn-primary', data: { dismiss: 'modal' }} Got it!
 
 - if params[:action] == 'export'
   :javascript
