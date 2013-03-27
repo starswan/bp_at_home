@@ -64,7 +64,8 @@ module BpAtHome
 
     # For heroku
     config.assets.initialize_on_precompile = false
-
+    config.assets.precompile += ['active_admin.css', 'active_admin/print.css', 'active_admin.js']
+    
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
   end
