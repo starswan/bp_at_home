@@ -1,4 +1,5 @@
 /.bundle
+*.swp
 /log/*.log
 /tmp
 .DS_Store
