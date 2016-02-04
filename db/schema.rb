@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130327002403) do
+ActiveRecord::Schema.define(:version => 20160131104629) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -58,6 +58,13 @@ ActiveRecord::Schema.define(:version => 20130327002403) do
     t.datetime "password_reset_sent_at"
   end
 
+  create_table "feedbacks", :force => true do |t|
+    t.integer  "patient_id"
+    t.string   "text"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "patients", :force => true do |t|
     t.integer  "doctor_id"
     t.string   "identifier"
@@ -70,11 +77,9 @@ ActiveRecord::Schema.define(:version => 20130327002403) do
   create_table "readings", :force => true do |t|
     t.integer  "systolic"
     t.integer  "diastolic"
-    t.integer  "pulse"
     t.integer  "patient_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
-    t.string   "arm"
     t.time     "time"
   end
 

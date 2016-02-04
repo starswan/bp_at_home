@@ -1,0 +1,19 @@
+.row{style: "margin-top: 40px;"}
+  .span6
+    %p= link_to 'Doctor Sign up', new_doctor_path, class: "btn btn-primary"
+
+    %h4{style: "margin-top: 30px;"} Sign in
+    .login_form
+      = form_tag sessions_path do
+        = label_tag :email
+        = text_field_tag :email, params[:email]
+        = label_tag :password
+        = password_field_tag :password
+        %p= link_to "Forgotten password?", new_password_reset_path
+        .field
+          = label_tag :remember_me
+          = check_box_tag :remember_me, 1, params[:remember_me]
+        %br
+        = submit_tag "Doctor Login", class: "btn btn-primary"
+  .span6
+    =image_tag 'preview.png', class: 'img-polaroid'

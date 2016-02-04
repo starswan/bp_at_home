@@ -1,13 +1,20 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.10'
+gem 'rails', '3.2.22.1'
 gem 'pg'
 gem 'haml-rails'
 gem 'bcrypt-ruby', '~> 3.0.0'
 gem 'simple_form'
-gem 'thin'
-gem 'newrelic_rpm'
 gem 'activeadmin'
+
+group :production do
+  gem 'newrelic_rpm'
+  gem 'thin'
+end
+
+group :development do
+  gem 'byebug'
+end
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
@@ -20,6 +27,7 @@ end
 group :test do
   gem 'tork'
   gem 'rb-fsevent'
+  gem 'mocha'
   gem 'shoulda'
 end
 

@@ -3,7 +3,7 @@ development:
   encoding: unicode
   database: bp_at_home_development
   pool: 5
-  username: Edward
+  username: <%= ENV['USER'] %>
   password:
 
 test:
@@ -11,6 +11,6 @@ test:
   encoding: unicode
   database: bp_at_home_test
   pool: 5
-  username: Edward
+  username: <%= ENV['USER'] %>
   password:
 

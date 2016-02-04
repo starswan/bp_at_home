@@ -1,9 +1,8 @@
 class ReadingsController < ApplicationController
   before_filter :authorize_patient!
+  before_filter :find_patient
 
   def index
-    @patient = Patient.find(params[:patient_id])
-
     if params[:from] && params[:to]
       @readings = @patient.readings.where(:created_at => params[:from]..params[:to]).order(:created_at)
       calculate_averages_from_averages
@@ -12,12 +11,10 @@ class ReadingsController < ApplicationController
       calculate_averages_from_averages
     end
 
-    @reading = @patient.readings.new
+    @reading = @patient.readings.new created_at: Date.today
   end
 
   def create
-    @patient = Patient.find(params[:patient_id])
-    @readings = @patient.readings.order(:created_at)
     @reading = Reading.create(params[:reading])
     if @reading.save
       redirect_to patient_readings_path(@patient), notice: "Reading successfully entered!"
@@ -27,19 +24,26 @@ class ReadingsController < ApplicationController
     end
   end
 
+  def new
+    @reading = @patient.readings.new created_at: Date.today
+  end
+
   def export
-    @patient = Patient.find(params[:patient_id])
     @readings = @patient.readings.order(:created_at)
     calculate_averages_from_averages
     @reading = @patient.readings.new
     render :index
   end
 
-  private
+private
 
-    def calculate_averages_from_averages
-      @sys_average = @readings.average(:systolic)
-      @dys_average = @readings.average(:diastolic)
-      @pulse_average = @readings.average(:pulse)
-    end
+  def find_patient
+    @patient = Patient.find(params[:patient_id])
+  end
+
+  def calculate_averages_from_averages
+    averages = Reading.averages @readings
+    @sys_average = averages.systolic
+    @dys_average = averages.diastolic
+  end
 end

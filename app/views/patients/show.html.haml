@@ -1,0 +1,77 @@
+%h4 Average over last 10 readings
+.row{style: "margin-top: 30px; margin-bottom: 30px;"}
+  .span4
+    .info_box.average_systolic
+      %h6 Average systolic
+      %p= @sys_average.to_i
+  .span4
+    .info_box.average_diastolic
+      %h6 Average diastolic
+      %p= @dys_average.to_i
+  .span4
+    .info_box.readings
+      %h6 Readings taken
+      %p= @readings.count
+
+.row
+  .span12
+    - if @readings.count > 0
+      = content_tag(:div, "", id: "readings_chart", data: { readings: @readings })
+    - else
+      %h2{style: "color: red;"} No readings yet for this date range
+
+- if @readings.count > 0
+  .row{style: "margin-top: 20px;"}
+    .span12
+      %h4 Filter by Dates
+      %p
+        %i Note: Dates are in 'yyyy-mm-dd' format
+      = form_tag doctor_patient_path(current_doctor, @patient), method: :get, class: "form-search" do
+        = label_tag :from
+        = text_field_tag :from, params[:from]
+        = label_tag :to
+        = text_field_tag :to, params[:to]
+        = submit_tag "Filter", name: nil, class: "btn btn-info"
+        = link_to doctor_patient_path(current_doctor, @patient), class: "btn btn-danger" do
+          %i.icon-refresh
+          Reset
+
+.row
+  .span12
+    %h4 Note
+    %p Please that this table shows ALL of the blood pressures taken for this patient. In order to see blood pressure over a specific period for this patient please set some date filters.
+
+.row
+  .span12
+    - if @readings.empty?
+      %h4 No readings yet for this patient
+    - else
+      %table.table.table-striped.table-hover
+        %thead
+          %tr
+            %th Created on
+            %th Time taken
+            %th Systolic BP
+            %th Diastolic BP
+        %tbody
+          - @readings.each do |reading|
+            %tr
+              %td= reading.created_at.strftime('%e %b %Y') if reading.created_at
+              %td= reading.time.strftime('%l %P') if reading.time
+              %td= reading.systolic
+              %td= reading.diastolic
+
+.modal.hide.fade
+  .modal-header
+    %h3 Printing is easy...
+  .modal-body
+    %p Just go up to the file menu of your browser and press print!
+  .modal-footer
+    %a{href: '#', class: 'btn btn-primary', data: { dismiss: 'modal' }} Got it!
+
+- if params[:action] == 'export'
+  :javascript
+    $(document).ready(function(){
+      $('.modal').modal('show');
+    });
+
