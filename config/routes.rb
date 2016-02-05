@@ -23,6 +23,7 @@ BpAtHome::Application.routes.draw do
     resources :readings do
       collection { get 'export' }
     end
+    resources :feedbacks
   end
 
   scope '/api' do

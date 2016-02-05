@@ -10,8 +10,12 @@ class Reading < ActiveRecord::Base
   Averages = Struct.new :systolic, :diastolic
 
   def self.averages readings
-    recent_readings = readings[-10..-1] or readings
-    Averages.new((recent_readings.map { |k| k.systolic }.sum / recent_readings.size),
-                 (recent_readings.map { |k| k.diastolic }.sum / recent_readings.size))
+    recent_readings = (readings[-10..-1] or readings)
+    if recent_readings.empty?
+      Averages.new 0, 0
+    else
+      Averages.new((recent_readings.map { |k| k.systolic }.sum / recent_readings.size),
+                   (recent_readings.map { |k| k.diastolic }.sum / recent_readings.size))
+    end
   end
 end

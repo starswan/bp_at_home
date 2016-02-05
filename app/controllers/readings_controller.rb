@@ -20,7 +20,7 @@ class ReadingsController < ApplicationController
       redirect_to patient_readings_path(@patient), notice: "Reading successfully entered!"
     else
       flash.now.alert = "There was an error with your entry. Please check and try again"
-      render :index
+      render :new
     end
   end
 
