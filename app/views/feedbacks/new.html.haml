@@ -1,0 +1,4 @@
+- model_class = Feedback
+.page-header
+  %h2=t '.title', :default => t('helpers.titles.new', :model => model_class.model_name.human, :default => "Tell us what you think")
+= render :partial => "form"

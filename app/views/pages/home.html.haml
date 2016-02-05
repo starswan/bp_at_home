@@ -1,6 +1,6 @@
 .row
   .span6.title_box
-    %h1 BP at Home
+    %h1 Blood Pressure at Home
     %p A free and simple solution for patients to record their home blood pressures and have them reviewed by their GP.
     %p{style: "margin-top: 50px;"}
       %i Note: This web application does not support IE7. Please use Chrome, Firefox or Safari (latest versions if possible)
@@ -10,35 +10,15 @@
 
 .row{style: "margin-top: 40px;"}
   .span6
-    %h2{style: "color: blue;"} Are you doctor?
     %hr
-    %h4 Sign up
-    %p= link_to 'Sign up', new_doctor_path, class: "btn btn-primary"
-
-    %h4{style: "margin-top: 30px;"} Sign in
-    .login_form
-      = form_tag sessions_path do
-        = label_tag :email
-        = text_field_tag :email, params[:email]
-        = label_tag :password
-        = password_field_tag :password
-        %p= link_to "Forgotten password?", new_password_reset_path
-        .field
-          = label_tag :remember_me
-          = check_box_tag :remember_me, 1, params[:remember_me]
-        %br
-        = submit_tag "Login", class: "btn btn-primary"
-  .span6
-    %h2{style: "color: green;"} Are you a patient?
-    %hr
-    %p Please enter your unique identifier to login and start entering your blood pressure readings
-    %p
-      %strong
-        Not sure of your identifier? Ask your doctor!
+    %p Please enter your patient identifier to login and enter your blood pressure readings
     .login_form{style: "margin-top: 30px;"}
       = form_tag sessions_path(query: 'patient') do
-        = label_tag :identifier
+        = label_tag :patient_identifier
         = text_field_tag :identifier
         %br
         %br
         = submit_tag 'Login', class: 'btn btn-success'
+    %p
+      %strong
+        Not sure of your patient identifier? Ask your doctor!

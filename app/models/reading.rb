@@ -1,11 +1,21 @@
 class Reading < ActiveRecord::Base
-  attr_accessible :diastolic, :patient_id, :pulse, :systolic, :arm, :created_at, :time
+  attr_accessible :diastolic, :patient_id, :systolic, :created_at, :time
 
   belongs_to :patient
 
-  validates :systolic, :diastolic, :pulse, :created_at, :arm, presence: true
-  validates_numericality_of :systolic, greater_than_or_equal_to: 80, only_integer: true
-  validates_numericality_of :diastolic, greater_than_or_equal_to: 30, only_integer: true
+  validates :systolic, :diastolic, :created_at, presence: true
+  validates_numericality_of :systolic, greater_than_or_equal_to: 70, less_than_or_equal_to: 240, only_integer: true
+  validates_numericality_of :diastolic, greater_than_or_equal_to: 30, less_than_or_equal_to: 130, only_integer: true
 
+  Averages = Struct.new :systolic, :diastolic
 
+  def self.averages readings
+    recent_readings = (readings[-10..-1] or readings)
+    if recent_readings.empty?
+      Averages.new 0, 0
+    else
+      Averages.new((recent_readings.map { |k| k.systolic }.sum / recent_readings.size),
+                   (recent_readings.map { |k| k.diastolic }.sum / recent_readings.size))
+    end
+  end
 end

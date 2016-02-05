@@ -11,14 +11,12 @@ class PatientsController < ApplicationController
 
     if params[:from] && params[:to]
       @readings = @patient.readings.where(:created_at => params[:from]..params[:to]).order(:created_at)
-      calculate_averages_from_averages
     else
       @readings = @patient.readings.order(:created_at)
-      calculate_averages_from_averages
     end
+    calculate_averages_from_averages
 
     @reading = @patient.readings.new
-    render 'readings/index'
   end
 
   def create
@@ -39,17 +37,16 @@ class PatientsController < ApplicationController
     redirect_to doctor_patients_path(current_doctor), notice: "Patient successfully removed."
   end
 
-  private
+private
 
-    def generate_random_identifier
-      o = [('a'..'z'),('A'..'Z')].map { |i| i.to_a }.flatten
-      string = (0...6).map{ o[rand(o.length)] }.join
-      return string
-    end
+  def generate_random_identifier
+    o = [('a'..'z'),('A'..'Z')].map { |i| i.to_a }.flatten
+    (0...6).map{ o[rand(o.length)] }.join
+  end
 
-    def calculate_averages_from_averages
-      @sys_average = @readings.average(:systolic)
-      @dys_average = @readings.average(:diastolic)
-      @pulse_average = @readings.average(:pulse)
-    end
+  def calculate_averages_from_averages
+    averages = Reading.averages @readings
+    @sys_average = averages.systolic
+    @dys_average = averages.diastolic
+  end
 end

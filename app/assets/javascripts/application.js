@@ -30,7 +30,8 @@ jQuery(function() {
     element: 'readings_chart',
     data: $('#readings_chart').data('readings'),
     xkey: 'created_at',
-    ykeys: ['systolic', 'diastolic', 'pulse'],
-    labels: ['Systolic', 'Diastolic', 'Pulse']
+    ykeys: ['systolic', 'diastolic'],
+    ymin: 40,
+    labels: ['Systolic', 'Diastolic']
   });
 });

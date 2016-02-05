@@ -1,1 +1,129 @@
-%h1 Hello world!
+- if params[:action] == 'index' || params[:action] == 'new' || params[:action] == 'create'
+  .row{style: "margin-top: 40px;"}
+    .span9
+      .well
+        %h2 Enter your blood pressure
+        %p
+          %span.badge.badge-success Step 1
+        %p
+          Record your blood pressure. Be sure to make a note of the higher value and the lower value. See helpful tips on the right.
+        %p{style: "margin-top: 30px;"}
+          %span.badge.badge-success Step 2
+        %p
+          Enter the readings into the following form:
+          = simple_form_for([@patient, @reading], html: { class: 'form-vertical' }) do |f|
+            = f.hidden_field :patient_id, value: @patient.id
+            = f.input :systolic, label: 'Higher value', hint: 'The higher value is the systolic pressure'
+            = f.input :diastolic, label: 'Lower value', hint: 'The lower value is the diastolic pressure'
+            = f.input :created_at, as: :string, label: 'Taken on'
+            = f.input :time, label: 'Time taken'
+            = f.submit 'Add blood pressure', class: 'btn btn-primary btn-large'
+        %p
+          %span.badge.badge-success Step 3
+        %p
+          Check the graph to see how you are doing
+    .span3
+      .accordion#accordion2
+        .accordion-group
+          .accordion-heading
+            %a.accordion-toggle{"data-parent"=>"accordion2", "data-toggle"=>"collapse", href: "#collapseOne"}
+              How to measure your blood pressure
+          #collapseOne.accordion-body.collapse
+            .accordion-inner
+              %p Get started by watching this video all about measuring your blood pressure
+              %p Once you have done this get started by entering your first blood pressure on the left
+              <iframe width="400" height="400" src="http://www.videojug.com/embed/e645c004-d5d4-b23d-dcce-ff0008c95709" frameborder="0" allowfullscreen></iframe>
+          .accordion-heading
+            %a.accordion-toggle{"data-parent"=>"accordion2", "data-toggle"=>"collapse", href: "#collapseTwo"}
+              Useful links
+          #collapseTwo.accordion-body.collapse
+            .accordion-inner
+              %p
+                %a{href: "http://healthguides.mapofmedicine.com/choices/map/hypertension1.html", target: "_blank"}Map of Medicine
+              %p
+                %a{href: "http://www.nhs.uk/conditions/Blood-pressure-(high)/Pages/Introduction.aspx", target: "_blank"}NHS Choices
+              %p
+                %a{href: "http://www.htmc.co.uk/pages/pv.asp?p=htmc48", target: "_blank"}Haughton Thornley Medical Centres on Hypertension
+
+      - if params[:action] == 'index'
+        = link_to export_patient_readings_path(current_patient), class: "btn btn-large btn-success" do
+          %i.icon-share-alt
+          Export/Print for your GP
+
+- elsif params[:action] == 'export'
+  .row
+    .span12
+      - if @readings.empty?
+        %h4 No readings yet for this patient
+      - else
+        %table.table.table-striped.table-hover
+          %thead
+            %tr
+              %th Created on
+              %th Time taken
+              %th Systolic BP
+              %th Diastolic BP
+          %tbody
+            - @readings.each do |reading|
+              %tr
+                %td= reading.created_at.strftime('%e %b %Y') if reading.created_at
+                %td= reading.time.strftime('%l %P') if reading.time
+                %td= reading.systolic
+                %td= reading.diastolic
+  .row
+    .span12
+      .page-header
+        %h4 Note to the doctor
+      %p Please that this table shows ALL of the blood pressures taken for this patient. In order to see blood pressure over a specific period for this patient please login with you account to BP At Home and set some date filters!
+
+- else
+  .row
+    .span12
+      - if @readings.count > 0
+        = content_tag(:div, "", id: "readings_chart", data: { readings: @readings })
+      - else
+        %h2{style: "color: red;"} No readings yet for this date range
+
+  - if @readings.count > 0 && params[:action] != 'export'
+    .row{style: "margin-top: 20px;"}
+      .span12
+        %h4 Filter by Dates
+        %p
+          %i Note: Dates are in 'yyyy-mm-dd' format
+        = form_tag patient_readings_path(@patient), method: :get, class: "form-search" do
+          = label_tag :from
+          = text_field_tag :from, params[:from]
+          = label_tag :to
+          = text_field_tag :to, params[:to]
+          = submit_tag "Filter", name: nil, class: "btn btn-info"
+          = link_to patient_readings_path(@patient), class: "btn btn-danger" do
+            %i.icon-refresh
+            Reset
+
+  .row{style: "margin-top: 30px; margin-bottom: 30px;"}
+    .span3
+      .info_box.readings
+        %h6 Readings taken
+        %p= @readings.count
+    .span3
+      .info_box.average_systolic
+        %h6 Average systolic
+        %p= @sys_average.to_i
+    .span3
+      .info_box.average_diastolic
+        %h6 Average diastolic
+        %p= @dys_average.to_i
+
+.modal.hide.fade
+  .modal-header
+    %h3 Printing is easy...
+  .modal-body
+    %p Just go up to the file menu of your browser and press print!
+  .modal-footer
+    %a{href: '#', class: 'btn btn-primary', data: { dismiss: 'modal' }} Got it!
+
+- if params[:action] == 'export'
+  :javascript
+    $(document).ready(function(){
+      $('.modal').modal('show');
+    });
