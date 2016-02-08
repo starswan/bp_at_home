@@ -1,4 +1,4 @@
-source 'https://rubygems.org'
+source 'http://rubygems.org'
 
 gem 'rails', '3.2.22.1'
 gem 'pg'
@@ -26,10 +26,9 @@ end
 
 group :test do
   gem 'tork'
-  gem 'rb-fsevent'
+#  gem 'rb-fsevent'
   gem 'mocha'
   gem 'shoulda'
 end
 
 gem 'jquery-rails'
-
