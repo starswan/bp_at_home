@@ -29,6 +29,7 @@ group :test do
 #  gem 'rb-fsevent'
   gem 'mocha'
   gem 'shoulda'
+  gem 'test-unit'
 end
 
 gem 'jquery-rails'
