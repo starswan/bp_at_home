@@ -12,16 +12,16 @@ class FeedbacksControllerTest < ActionController::TestCase
   end
 
   test "should get new" do
-    get :new
+    get :new, patient_id: @feedback.patient
     assert_response :success
   end
 
   test "should create feedback" do
     assert_difference('Feedback.count') do
-      post :create, feedback: { patient_id: @feedback.patient_id, text: @feedback.text }
+      post :create, patient_id: @feedback.patient, feedback: { text: @feedback.text }
     end
 
-    assert_redirected_to feedback_path(assigns(:feedback))
+    assert_redirected_to patient_path(@feedback.patient)
   end
 
   test "should show feedback" do

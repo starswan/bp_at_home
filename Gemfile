@@ -1,11 +1,13 @@
-source 'https://rubygems.org'
+source 'http://rubygems.org'
+
+ruby '2.2.4'
 
 gem 'rails', '3.2.22.1'
 gem 'pg'
 gem 'haml-rails'
 gem 'bcrypt-ruby', '~> 3.0.0'
 gem 'simple_form'
-gem 'activeadmin'
+gem 'activeadmin', github: 'activeadmin', branch: '0-6-stable'
 
 group :production do
   gem 'newrelic_rpm'
@@ -26,10 +28,9 @@ end
 
 group :test do
   gem 'tork'
-  gem 'rb-fsevent'
   gem 'mocha'
   gem 'shoulda'
+  gem 'test-unit'
 end
 
 gem 'jquery-rails'
-
