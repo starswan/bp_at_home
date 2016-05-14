@@ -2,7 +2,7 @@ class FeedbacksController < InheritedResources::Base
   before_filter :find_patient, only: [:new, :create]
   # POST /patients/1/feedback
   def create
-    @feedback = @patient.feedbacks.new(params[:feedback])
+    @feedback = @patient.feedbacks.new(feedback_params)
 
     respond_to do |format|
       if @feedback.save
@@ -14,6 +14,10 @@ class FeedbacksController < InheritedResources::Base
   end
 
 private
+  def feedback_params
+    params.require(:feedback).permit(:text)
+  end
+
   def find_patient
     @patient = Patient.find params[:patient_id]
   end

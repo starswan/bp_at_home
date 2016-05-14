@@ -34,3 +34,4 @@ group :test do
 end
 
 gem 'jquery-rails'
+gem 'strong_parameters'
