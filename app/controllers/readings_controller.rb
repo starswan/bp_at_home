@@ -15,7 +15,7 @@ class ReadingsController < ApplicationController
   end
 
   def create
-    @reading = Reading.create(reading_params)
+    @reading = @patient.readings.create(reading_params)
     if @reading.save
       redirect_to patient_readings_path(@patient), notice: "Reading successfully entered!"
     else
@@ -37,7 +37,7 @@ class ReadingsController < ApplicationController
 
 private
   def reading_params
-    params.require(:readings).permit(:diastolic, :systolic, :created_at, :time)
+    params.require(:reading).permit(:diastolic, :systolic, :created_at, :time)
   end
 
   def find_patient
