@@ -1,5 +1,4 @@
 class Doctor < ActiveRecord::Base
-  attr_accessible :name, :email, :practice, :password, :password_confirmation
   has_secure_password
   validates :name, :email, :practice, presence: true
   validates_uniqueness_of :email

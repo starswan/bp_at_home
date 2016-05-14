@@ -1,6 +1,4 @@
 class Reading < ActiveRecord::Base
-  attr_accessible :diastolic, :patient_id, :systolic, :created_at, :time
-
   belongs_to :patient
 
   validates :systolic, :diastolic, :created_at, presence: true

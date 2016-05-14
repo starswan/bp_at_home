@@ -243,6 +243,7 @@ DEPENDENCIES
   rails (= 4.2.5)
   shoulda
   simple_form
+  strong_parameters
   test-unit
   thin
   tork
