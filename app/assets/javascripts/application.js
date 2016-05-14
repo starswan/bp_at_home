@@ -15,6 +15,7 @@
 //= require twitter/bootstrap
 //= require raphael
 //= require morris
+//= require_tree .
 
 jQuery(function() {
 
