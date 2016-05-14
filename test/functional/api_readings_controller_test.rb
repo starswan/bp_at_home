@@ -9,7 +9,7 @@ class ApiReadingsControllerTest < ActionController::TestCase
     assert_equal(120,reading.systolic)
     assert_equal(80, reading.diastolic)
     assert_equal(DateTime.parse('2016-01-04'), reading.created_at)
-    assert_equal(DateTime.parse('2000-01-01 11:00'), reading.time)
+    assert_equal(DateTime.parse('2000-01-01 10:00 UTC'), reading.time)
     assert_response :success
   end
 
