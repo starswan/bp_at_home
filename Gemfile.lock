@@ -115,7 +115,7 @@ GEM
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
     listen (0.7.3)
-    mail (2.5.4)
+    mail (2.5.5)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     meta_search (1.1.3)
